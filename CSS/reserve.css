@@ -1,0 +1,70 @@
+.section-title {
+  font-size: 22px;
+  text-align: center;
+  margin-bottom: 30px;
+  color: #111;
+}
+
+.appointment-form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .appointment-form {
+    grid-template-columns: 1fr;
+  }
+}
+
+.appointment-form .form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-form label {
+  margin-bottom: 6px;
+  font-size: 14px;
+  font-weight: bold;
+  color: #333;
+}
+
+.appointment-form input,
+.appointment-form select {
+  padding: 12px 14px;
+  font-family: 'Yekanbakh', sans-serif;
+  font-size: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  background-color: #fff;
+  transition: border 0.3s ease;
+}
+
+.appointment-form input:focus,
+.appointment-form select:focus {
+  border-color: #111;
+  outline: none;
+}
+
+.appointment-form button {
+  grid-column: span 2;
+  padding: 12px 20px;
+  background-color: #111;
+  color: #fff;
+  font-family: 'Yekanbakh';
+  font-size: 15px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.appointment-form button:hover {
+  background-color: #333;
+}
+.section-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 40px;
+  color: #222;
+}

@@ -1,0 +1,149 @@
+@font-face {
+  font-family: 'Yekanbakh';
+  src: url(../font/YekanBakh-VF.woff);
+}
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+.container   {
+  max-width: 1200px;
+  margin: auto;
+  display: flex;
+}
+html, body {
+  height: 100%;
+  font-family: 'Yekanbakh', sans-serif;
+  direction: rtl;
+}
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Yekanbakh';
+  background-image: url(../img/andrea-donato-MNu0n-3BIKs-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  direction: rtl;
+}
+h2 {
+  margin: 0;
+}
+.welcome-msg {
+  font-size: smaller;
+}
+.login-box {
+  flex: 1;
+  background: #fff;
+  padding: 40px;
+  border-top-left-radius: none;
+  border-bottom-left-radius: none;
+  border-top-right-radius: 16px;
+  border-bottom-right-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 100%;
+  max-width: 500px;
+  text-align: center;
+}
+
+.login-box h2 {
+  margin-bottom: 20px;
+  color: #444;
+}
+
+label {
+  display: block;
+  text-align: right;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #333;
+}
+
+input {
+  font-family: 'Yekanbakh';
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+button {
+  font-family: 'Yekanbakh';
+  width: 100%;
+  padding: 12px;
+  background-color: #419c3e;
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  transform: scale(1);
+}
+
+button:hover {
+  background-color: #215220;
+  transform: scale(1.05);
+}
+
+.img-box {
+  flex: 1;
+  background-image: url(../img//h-co-a2VJlQ3yxmQ-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  border-top-left-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-top-right-radius: none;
+  border-bottom-right-radius: none;
+}
+
+.blur {
+  position: absolute;
+  inset: 0;
+  background-image: url(../img/andrea-donato-MNu0n-3BIKs-unsplash.jpg);
+  background-size: cover;
+  background-position: center;
+  filter: blur(8px);
+  z-index: -1;
+}
+.hesab-nadari {
+  padding-top: 10px;
+  font-size: smaller;
+}
+.hesab-nadari a {
+  color: #dfa042;
+}
+
+.input-password-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.input-password-wrapper input {
+  flex: 1;
+  padding-left: 40px; /* برای قرار گرفتن آیکون سمت چپ */
+  height: 45px;
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.eye-icon {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  pointer-events: auto;
+}
+
+

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Persian Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
+    <title>پنل مدیریت</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/manager.css">
+</head>
+<body>
+    
+  <header class="main-header">
+    <div class="container header-container">
+      <div class="logo"><a href="index.html">آرایشگاه مردانه هوگو</a></div>
+
+      <div class="nav-actions">
+        <a href="reserve.html" class="btn-book mobile-only">رزرو آنلاین نوبت</a>
+        <button class="menu-toggle">&#9776;</button>
+      </div>
+      
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="./index.html#mgr-treatment">خدمات</a></li>
+          <li><a href="./index.html#locations">شعب</a></li>
+          <li><a href="./index.html#story">درباره ما</a></li>
+          <li><a href="#contact">تماس با ما</a></li>
+          <li><a href="reserve.html" class="btn-book desktop-only">رزرو آنلاین نوبت</a></li>
+          <li><a href="profile.html" title="پروفایل"><img src="./icons/setting.png" alt=""></a></li>
+          <li><a href="login.html" id="logout-btn" title="خروج"><img src="./icons/arrow.png" alt=""></a></li>
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+    
+      <div class="container">
+        <h2 class="section-title">پنل مدیریت - افزودن زمان‌های آزاد</h2>
+    
+        <div class="admin-panel">
+          <div class="form-group">
+            <label for="slot-date">تاریخ:</label>
+            <input type="text" id="slot-date" placeholder="انتخاب تاریخ" readonly />
+
+          </div>
+          <div class="form-group">
+            <label for="slot-time">ساعت:</label>
+            <input type="time" id="slot-time" />
+          </div>
+          <button id="add-slot-btn">افزودن زمان</button>
+    
+          <hr />
+    
+          <h3>زمان‌های ثبت‌شده:</h3>
+          <ul id="slots-list"></ul>
+        </div>
+      </div>
+    
+  <!-- ✅ تماس با ما -->
+  <section id="contact" class="contact-section">
+    <div class="container contact-container">
+      <div class="contact-info">
+        <h2 class="section-title">تماس با ما</h2>
+        <ul>
+          <li><img src="./icons/icons8-location-30.png" alt=""> کاشمر ، خیابان مدرس ، روبه‌روی پارک ملت</li>
+          <li><img src="./icons/icons8-phone-30.png" alt=""> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+          <li><img src="./icons/gmail.png" alt=""> info@mgrbarbershop.ir</li>
+          <li class="social-icons">
+            <a href="https://www.instagram.com/amiryaghu_bi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><img src="./icons/icons8-instagram-94.png" alt="instagram"></a>
+            <a href=""><img src="./icons/icons8-telegramm-94.png" alt="telegram"></a>
+            <a href=""><img src="./icons/icons8-whatsapp-94.png" alt="whatsapp"></a>
+          </li>
+        </ul> 
+      </div>
+      <div class="contact-map">
+        <iframe
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 8px;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=35.2362399,58.4576847&hl=fa&z=15&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <p class="footer-text">
+      ساخته شده توسط حامد <img src="./icons/icons8-rocket-48.png" alt=""> <br>
+      زیبایی در جزئیات، تخصص در خدمات <img src="./icons/barbershop.png" alt="">
+    </p>
+  </footer>
+
+    
+  
+<script src="./JS/login.js"></script>
+<script src="./JS/admin.js"></script>
+<script src="./JS/main.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Persian Datepicker JS -->
+<script src="https://cdn.jsdelivr.net/npm/persian-date@1.1.0/dist/persian-date.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+<!-- راه‌اندازی -->
+<script>
+  $(function() {
+    $("#slot-date").persianDatepicker({
+      format: 'YYYY/MM/DD',
+      autoClose: true,  
+      initialValue: false
+    });
+  });
+</script>
+
+    
+
+</body>
+</html>
