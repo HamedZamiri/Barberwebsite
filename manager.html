@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Persian Datepicker CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/css/persian-datepicker.min.css" />
+    <title>پنل مدیریت</title>
+    <link rel="stylesheet" href="./CSS/style.css">
+    <link rel="stylesheet" href="./CSS/manager.css">
+</head>
+<body>
+    
+  <header class="main-header">
+    <div class="container header-container">
+      <div class="logo"><a href="index.html">آرایشگاه مردانه هوگو</a></div>
+
+      <div class="nav-actions">
+        <a href="reserve.html" class="btn-book mobile-only">رزرو آنلاین نوبت</a>
+        <button class="menu-toggle">&#9776;</button>
+      </div>
+      
+
+      <!-- سایدبار TikTime-style -->
+<div id="customSidebar" class="tiktime-sidebar">
+<div class="sidebar-header">
+<img src="./icons/avatar.png" class="avatar" alt="آواتار">
+<div class="user-info">
+  <p class="user-name">..</p>
+  <p class="user-phone">..</p>
+</div>
+</div> 
+
+<ul class="sidebar-menu">
+
+<li><a href="profile.html"><img src="./icons/wallet.png"> پروفایل <span class="menu-arrow">&gt;</span></a></li>
+<li><a href="#mgr-treatment"><img src="./icons/crown.png"> خدمات <span class="menu-arrow">&gt;</span></a></li>
+<li><a href="#locations"><img src="./icons/plus.png"> شعب ما <span class="menu-arrow">&gt;</span></a></li>
+<li><a href="#story"><img src="./icons/chart.png"> درباره ما <span class="menu-arrow">&gt;</span></a></li>
+<li><a href="#contact"><img src="./icons/device.png"> تماس با ما <span class="menu-arrow">&gt;</span></a></li>
+<li><a href="login.html"><img src="./icons/power.png"> خروج <span class="menu-arrow">&gt;</span></a></li>
+</ul>
+
+<div class="sidebar-footer">
+<p>VER 1.0</p>
+<img src="./icons/sinoos-logo.png" class="sinoos-logo" alt="Sinoos Logo">
+<p>طراحی و اجرا توسط حامد</p>
+</div>
+</div>
+
+      <nav class="main-nav">
+        <ul>
+          <li><a href="profile.html">پروفایل</a></li>
+          <li><a href="#mgr-treatment">خدمات</a></li>
+          <li><a href="#locations">شعب</a></li>
+          <li><a href="#story">درباره ما</a></li>
+          <li><a href="#contact">تماس با ما</a></li>
+          <li><a href="reserve.html" class="btn-book desktop-only">رزرو آنلاین نوبت</a></li>
+          <!-- <li><a href="profile.html" title="پروفایل"><img src="./icons/setting.png" alt=""></a></li> -->
+          <!-- <li><a href="login.html" id="logout-btn" title="خروج"><img src="./icons/arrow.png" alt=""></a></li> -->
+
+        </ul>
+      </nav>
+    </div>
+  </header>
+    
+      <div class="container">
+        <h2 class="section-title">پنل مدیریت - افزودن زمان‌های آزاد</h2>
+    
+        <div class="admin-panel">
+          <div id="container"></div>
+          <div class="overlay" id="overlay"></div>
+
+          <!-- Bottom Sheet -->
+          <div class="btn-box" id="reservation-box">
+            <div class="handle-bar"></div>
+            <div class="btn-button">
+              <button>
+                <span class="btn-text">ثبت مشتری</span>
+                <span class="btn-icon">👤</span>
+              </button>
+              <button>
+                <span class="btn-text">ثبت نوبت</span>
+                <span class="btn-icon">🗓️</span>
+              </button>
+            </div>
+          </div>
+          <!-- <div class="form-group">
+            <label for="slot-date">تاریخ:</label>
+            <input type="text" id="slot-date" placeholder="انتخاب تاریخ" readonly />
+
+          </div>
+          <div class="form-group">
+            <label for="slot-time">ساعت:</label>
+            <input type="time" id="slot-time" />
+          </div>
+          <button id="add-slot-btn">افزودن زمان</button>
+    
+          <hr />
+    
+          <h3>زمان‌های ثبت‌شده:</h3>
+          <ul id="slots-list"></ul> -->
+        </div>
+
+        <section class="admin-appointments">
+          <h2 class="section-title">نوبت‌های ثبت‌شده</h2>
+          <div id="admin-appointments" class="appointment-cards">
+            <p>در حال بارگذاری...</p>
+          </div>
+        </section>
+        
+        
+      </div>
+
+    
+  <!-- ✅ تماس با ما -->
+  <section id="contact" class="contact-section">
+    <div class="container contact-container">
+      <div class="contact-info">
+        <h2 class="section-title">تماس با ما</h2>
+        <ul>
+          <li><img src="./icons/icons8-location-30.png" alt=""> کاشمر ، خیابان مدرس ، روبه‌روی پارک ملت</li>
+          <li><img src="./icons/icons8-phone-30.png" alt=""> ۰۲۱-۱۲۳۴۵۶۷۸</li>
+          <li><img src="./icons/gmail.png" alt=""> info@mgrbarbershop.ir</li>
+          <li class="social-icons">
+            <a href="https://www.instagram.com/amiryaghu_bi?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw=="><img src="./icons/icons8-instagram-94.png" alt="instagram"></a>
+            <a href=""><img src="./icons/icons8-telegramm-94.png" alt="telegram"></a>
+            <a href=""><img src="./icons/icons8-whatsapp-94.png" alt="whatsapp"></a>
+          </li>
+        </ul> 
+      </div>
+      <div class="contact-map">
+        <iframe
+          width="100%"
+          height="300"
+          style="border:0; border-radius: 8px;"
+          loading="lazy"
+          allowfullscreen
+          referrerpolicy="no-referrer-when-downgrade"
+          src="https://www.google.com/maps?q=35.2362399,58.4576847&hl=fa&z=15&output=embed">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <footer class="main-footer">
+    <p class="footer-text">
+      ساخته شده توسط حامد <img src="./icons/icons8-rocket-48.png" alt=""> <br>
+      زیبایی در جزئیات، تخصص در خدمات <img src="./icons/barbershop.png" alt="">
+    </p>
+  </footer>
+
+    
+  
+<script src="./JS/login.js"></script>
+<script src="./JS/admin.js"></script>
+<script src="./JS/main.js"></script>
+<script src="./JS/post.js"></script>
+
+<!-- jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- Persian Datepicker JS -->
+<script src="https://cdn.jsdelivr.net/npm/persian-date@1.1.0/dist/persian-date.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/persian-datepicker@1.2.0/dist/js/persian-datepicker.min.js"></script>
+<!-- راه‌اندازی -->
+<script>
+  $(function() {
+    $("#slot-date").persianDatepicker({
+      format: 'YYYY/MM/DD',
+      autoClose: true,  
+      initialValue: false
+    });
+  });
+</script>
+
+    
+
+</body>
+</html>

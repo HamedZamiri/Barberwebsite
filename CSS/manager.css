@@ -1,0 +1,378 @@
+@font-face {
+    font-family: 'Yekanbakh';
+    src: url(../font/YekanBakh-VF.woff);
+}
+body {
+    font-family: 'Yekanbakh';
+}
+* {
+  box-sizing: border-box;
+}
+
+#container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin: 2rem auto;
+  width: 100%;
+  max-width: 700px; /* به دلخواه */
+  padding: 0 1rem;
+}
+
+.post, .post1 {
+  width: 100%;
+  max-width: 700px;
+}
+
+
+
+.post,
+.post1 {
+  display: flex;
+  max-width: 500px;
+  border-radius: 20px;
+  overflow: hidden;
+  color: white;
+  margin-bottom: 1rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.post {
+  background: linear-gradient(
+    250deg,
+    rgb(9, 9, 121) 0%,
+    rgba(8, 8, 107, 1) 39%,
+    rgba(0, 0, 0, 1) 77%
+  );
+}
+
+.post1 {
+  background: linear-gradient(
+    250deg,
+    rgba(194, 39, 39, 1) 0%,
+    rgba(166, 41, 41, 1) 39%,
+    rgba(0, 0, 0, 1) 70%
+  );
+}
+
+.time,
+.time1 {
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  writing-mode: vertical-rl;
+  text-align: center;
+  font-weight: bold;
+  font-size: 14px;
+  padding: 10px 0;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+
+.time {
+  background-color: #1b1b85;
+}
+
+.time1 {
+  background-color: #d11d1d;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  padding: 10px;
+}
+
+.section {
+  flex: 1;
+  text-align: center;
+}
+
+.day h1 {
+  font-size: 28px;
+  margin: 0;
+}
+
+.day p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.money h1 {
+  font-size: 20px;
+  margin: 0;
+}
+
+.money p {
+  font-size: 12px;
+  margin: 0;
+}
+
+.btn-book5 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-book5 a {
+  width: 35px;
+  height: 35px;
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  pointer-events: none; 
+}
+
+.btn-book5 a img {
+  width: 24px;
+  height: 24px;
+  transition: transform 0.3s ease;
+  pointer-events: auto; 
+}
+
+.btn-book5 a img:hover {
+  transform: scale(1.15);
+}
+
+.btn-book5 p {
+  font-size: 12px;
+  margin: 0;
+  pointer-events: none; /* اصلاً روش هیچ هاوری نباشه */
+}
+
+
+.divider {
+  width: 1px;
+  height: 60%;
+  background-color: #ffffff55;
+  margin: 0 10px;
+}
+button {
+  font-family: inherit;
+}
+
+#show-btn-box {
+  padding: 15px 30px;
+  font-size: 18px;
+  background-color: #555;
+  color: white;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0, 0, 0, 0.4);
+  z-index: 999;
+  display: none;
+}
+
+.overlay.active {
+  display: block;
+}
+
+.btn-box {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  max-width: 500px;
+  width: 100%;
+  margin: auto;
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-top-left-radius: 20px;
+  box-shadow: 0 -4px 10px rgba(0,0,0,0.1);
+  padding: 20px 10px;
+  z-index: 1000;
+  transition: bottom 0.4s ease, transform 0.3s ease;
+}
+
+.btn-box.active {
+  bottom: 0;
+}
+
+.handle-bar {
+  width: 60px;
+  height: 6px;
+  background-color: #ccc;
+  border-radius: 3px;
+  margin: 0 auto 15px auto;
+}
+
+.btn-button {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.btn-button button {
+  height: 60px;
+  width: 100%;
+  border-radius: 15px;
+  border: none;
+  background: rgb(221, 221, 221);
+  font-size: 16px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.btn-button button:hover {
+  background: rgb(200, 200, 200);
+}
+
+.btn-text {
+  color: #111;
+}
+
+.btn-icon {
+  font-size: 22px;
+}
+
+/* --- صفحه مدیریت نوبت‌ها --- */
+/* .admin-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 700px;
+  margin: 40px auto;
+  background-color: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+
+}
+
+.admin-panel .form-group,
+.admin-panel h3 {
+  width: 100%;
+  text-align: center;
+}
+
+.admin-panel label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: bold;
+}
+
+.admin-panel input {
+  font-family: 'Yekanbakh';
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#add-slot-btn {
+  font-family: 'Yekanbakh';
+  background-color: #111;
+  color: #fff;
+  border: none;
+  padding: 10px 18px;
+  font-size: 14px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 8px;
+}
+
+#add-slot-btn:hover {
+  background-color: #333;
+}
+
+#slots-list {
+  width: 100%;
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+#slots-list li {
+  margin-bottom: 10px;
+  font-size: 15px;
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+#slots-list button {
+  background-color: crimson;
+  color: #fff;
+  border: none;
+  padding: 5px 10px;
+  font-family: 'Yekanbakh';
+  font-size: 13px;
+  border-radius: 4px;
+  cursor: pointer;
+} */
+
+.admin-appointments {
+  margin-top: 40px;
+}
+
+.appointment-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+
+.appointment-card {
+  background-color: #fff;
+  border: 1px solid #eee;
+  border-radius: 10px;
+  padding: 16px 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+  transition: transform 0.2s ease;
+}
+
+.appointment-card:hover {
+  transform: translateY(-5px);
+}
+
+.appointment-card h3 {
+  font-size: 17px;
+  margin-bottom: 8px;
+  color: #222;
+}
+
+.appointment-card p {
+  margin: 4px 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+.delete-appointment-btn {
+  margin-top: 10px;
+  padding: 6px 12px;
+  background-color: crimson;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-family: 'Yekanbakh';
+  font-size: 13px;
+  transition: background-color 0.3s ease;
+}
+
+.delete-appointment-btn:hover {
+  background-color: darkred;
+}
+

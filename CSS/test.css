@@ -1,0 +1,679 @@
+@font-face {
+  font-family: 'yekanbakh';
+  src: url('../font/YekanBakh-VF.woff');
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'yekanbakh', sans-serif;
+  background-color: #f4f4f4;
+  direction: rtl;
+}
+.main-header {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 43%, rgba(9, 9, 121, 1) 71%, rgba(0, 212, 255, 1) 100%);
+  transition: background 0.3s ease;
+  color: white;
+}
+
+.sabbtnobat {
+  /* background: #000000;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 1) 80%, rgba(0, 57, 68, 1) 86%, rgba(0, 103, 124, 1) 92%, rgba(0, 212, 255, 1) 100%); */
+  color: white;
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 60px;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.back-button {
+  position: absolute;
+  left: 16px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  width: 50px;
+}
+
+.back-button img {
+  width: 24px;   /* بزرگ‌تر از حالت پیش‌فرض */
+  height: 24px;
+}
+
+
+.back-button:hover {
+  opacity: 0.7;
+}
+
+
+.appointment-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.row {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.row.two-cols {
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.row.two-cols input {
+  flex: 1;
+  min-width: 100px;
+  width: 100%;
+  max-width: 100%;
+}
+
+.row-contact {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  width: 100%;
+  max-width: 100%;
+  flex-wrap: nowrap;
+  overflow: hidden;
+}
+
+.fields {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+  width: 100%;
+}
+
+.fields input {
+  direction: rtl;
+  text-align: right;
+}
+
+input[type="tel"] {
+  direction: rtl !important;
+  text-align: right !important;
+}
+
+.fields input,
+.row input,
+.row select {
+  padding: 12px;
+  border-radius: 10px;
+  border: none;
+  font-size: 15px;
+  background-color: white;
+  font-family: 'yekanbakh';
+  width: 100%;
+  max-width: 100%;
+}
+
+.contact-pick {
+  background-color: #e0e0e0;
+  padding: 10px 8px;
+  border-radius: 12px;
+  text-align: center;
+  max-width: 80px;
+  min-width: 70px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: 'yekanbakh';
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.contact-icon img {
+  width: 36px;
+  height: 36px;
+}
+.contact-pick:hover {
+  background-color: #d6d6d6;
+}
+.contact-icon p {
+  font-size: 13px;
+  margin: 4px 0;
+}
+
+.bottom-line {
+  height: 1px;
+  background-color: #ccc;
+  margin-top: 4px;
+}
+
+.switches label {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #e0e0e0;
+  padding: 10px 15px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'yekanbakh';
+}
+
+.switches input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 42px;
+  height: 24px;
+  background-color: #bbb;
+  border-radius: 50px;
+  position: relative;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  vertical-align: middle;
+  outline: none;
+}
+
+.switches input[type="checkbox"]::before {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 20px;
+  background-color: white;
+  border-radius: 50%;
+  top: 2px;
+  right: 2px;
+  transition: transform 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.2);
+}
+
+.switches input[type="checkbox"]:checked {
+  background-color: #4CAF50;
+}
+
+.switches input[type="checkbox"]:checked::before {
+  transform: translateX(-18px); /* برای راست به چپ */
+}
+
+
+
+.service-box {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 500px;
+  background: #f1f1f1;
+  border-top-left-radius: 20px;
+  border-top-right-radius: 20px;
+  padding: 12px;
+  box-shadow: 0 -2px 10px rgba(0,0,0,0.15);
+  z-index: 1001;
+  transition: bottom 0.3s ease, transform 0.3s ease;
+}
+
+.service-box.active {
+  bottom: 0;
+}r
+
+.drag-bar {
+  width: 60px;
+  height: 5px;
+  background-color: #ccc;
+  border-radius: 2.5px;
+  margin: 0 auto 8px auto;
+  cursor: grab;
+}
+
+.service-header {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+/* .service-box .service-header::before {
+  content: "";
+  width: 60px;
+  height: 4px;
+  background-color: #ccc;
+  border-radius: 2px;
+  position: absolute;
+  top: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+} */
+
+
+
+.tab {
+  background: #ddd;
+  border-radius: 15px;
+  padding: 6px 15%; 
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.service-content {
+  background: white;
+  padding: 10px 15px;
+  border-radius: 12px;
+  text-align: center;
+  font-size: 14px;
+  font-family: 'yekanbakh';
+  min-height: 60px;
+}
+
+.service-button {
+  width: 100%;
+  background: #ddd;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-family: 'yekanbakh';
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* ✅ حالت موبایل */
+@media (max-width: 480px) {
+  .form-wrapper {
+    margin: 30px 12px;
+    padding: 16px;
+  }
+
+  .contact-pick {
+    padding: 6px;
+    max-width: 64px;
+  }
+
+  .contact-icon img {
+    width: 30px;
+    height: 30px;
+  }
+
+  .contact-icon p {
+    font-size: 11px;
+  }
+
+  .row.two-cols {
+    flex-direction: row;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .row.two-cols input {
+    flex: 1;
+    min-width: 100px;
+    width: 100%;
+  }
+}
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+  font-family: 'yekanbakh', sans-serif;
+  overflow-x: hidden;
+  width: 100%;
+}
+.form-wrapper {
+  width: 100%;
+  max-width: 500px;
+  margin: 40px auto;
+  background: #f5f5f5;
+  border-radius: 30px;
+  padding: 20px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  z-index: 1;
+  position: relative;
+}
+
+/* Floating Labels */
+.floating-group {
+  position: relative;
+  margin-top: 14px;
+}
+
+.floating-group input {
+  width: 100%;
+  padding: 22px 12px 10px;  /* افزایش padding-top */
+  font-size: 15px;
+  border: none;
+  border-radius: 10px;
+  background: white;
+  font-family: 'yekanbakh';
+  outline: none;
+  caret-color: #00bfff;
+  z-index: 1;
+  line-height: 1.6; /* 👈 برای وسط قرار گرفتن متن */
+}
+
+.floating-group label {
+  position: absolute;
+  right: 14px;
+  top: 14px;  /* 👈 کمی بالاتر */
+  font-size: 15px;
+  color: #888;
+  background: white;
+  padding: 0 4px;
+  pointer-events: none;
+  transition: all 0.2s ease;
+  z-index: 2;
+}
+
+.floating-group input:focus + label,
+.floating-group input:not(:placeholder-shown) + label {
+  top: 4px;
+  font-size: 12px;
+  color: #00bfff;
+}
+
+
+/* Modal Overlay */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 2000;
+  left: 0; top: 0;
+  width: 100%; height: 100%;
+  background-color: rgba(0,0,0,0.5);
+  justify-content: center;
+  align-items: center;
+}
+
+/* Modal Box */
+.modal-content {
+  background: #eee;
+  padding: 20px;
+  border-radius: 16px;
+  width: 93%;
+  max-width: 400px;
+  text-align: center;
+  font-family: 'yekanbakh';
+}
+
+.modal-title {
+  font-size: 16px;
+  margin-bottom: 12px;
+}
+
+.modal-content button {
+  margin-top: 5px;
+  padding: 5px;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.modal-actions .btn {
+  flex: 1;
+  padding: 10px;
+  border-radius: 12px;
+  font-size: 14px;
+  cursor: pointer;
+  font-family: 'yekanbakh';
+  border: none;
+}
+
+.modal-actions .cancel {
+  background: #dcdcdc;
+  color: black;
+}
+
+.modal-actions .confirm {
+  background: black;
+  color: white;
+}
+
+.service-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  background: #fff;
+  border-radius: 12px;
+  padding: 10px 16px;
+  margin-bottom: 10px;
+  direction: rtl;
+  font-family: inherit;
+  position: relative;
+}
+
+
+/* مخفی کردن چک‌باکس پیش‌فرض */
+.service-item input[type="checkbox"] {
+  display: none;
+}
+
+/* چک‌باکس سفارشی */
+.custom-checkbox {
+  width: 20px;
+  height: 20px;
+  border: 2px solid #007BFF;
+  border-radius: 4px;
+  position: relative;
+  margin-left: 0;
+  margin-right: 8px;
+  flex-shrink: 0;
+}
+
+.custom-checkbox::after { 
+  content: "";
+  position: absolute;
+  width: 10px;
+  height: 10px;
+  background: #007BFF;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0);
+  transition: 0.2s ease-in-out;
+  border-radius: 2px;
+}
+
+/* ✅ افکت تیک درست بشه بدون نیاز به sibling */
+.service-item .custom-checkbox.checked::after {
+  transform: translate(-50%, -50%) scale(1);
+}
+
+.service-name {
+  font-size: 15px;
+  color: #333;
+  flex-grow: 1;
+}
+#empty-message {
+  text-align: center;
+  color: #999;
+  padding: 20px 0;
+  font-size: 14px;
+  font-family: 'yekanbakh';
+}
+
+/* ترتیب درست عناصر خدمات */
+.service-item {
+  flex-direction: row-reverse;
+}
+
+.custom-checkbox {
+  margin-left: 8px;
+  margin-right: 0;
+  order: 1;
+}
+
+.service-name {
+  order: 2;
+}
+.overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(0,0,0,0.4);
+  z-index: 1000;
+  display: none;
+}
+.overlay.active {
+  display: block;
+}
+
+.service-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.service-actions .btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-family: 'yekanbakh';
+  cursor: pointer;
+  border: none;
+}
+
+.service-actions .cancel {
+  background: #ddd;
+  color: black;
+}
+
+.service-actions .confirm {
+  background: black;
+  color: white;
+}
+
+.selected-services {
+  background: #f1f1f1;
+  padding: 12px 16px;
+  border-radius: 14px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  font-family: 'yekanbakh';
+  margin-bottom: 10px;
+}
+
+.section-title {
+  font-size: 15px;
+  color: #666;
+  flex-shrink: 0;
+}
+
+#service-tags {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.service-tag {
+  background: #e0e0e0;
+  padding: 4px 8px;
+  border-radius: 10px;
+  font-size: 13px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.service-tag .remove-tag {
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 14px;
+  color: #999;
+}
+
+.done {
+  font-family: 'yekanbakh';
+  color: #fff;
+  border: none;
+  border-radius: 10px;
+  background: #2a9b70;
+  background: linear-gradient(90deg, rgba(42, 155, 112, 1) 0%, rgba(87, 199, 133, 1) 50%, rgba(116, 255, 92, 1) 100%);
+  padding: 10px;
+  cursor: pointer;
+}
+
+@media (max-width: 480px) {
+  .form-wrapper {
+    border-top-left-radius: 30px;
+    border-top-right-radius: 30px;
+    overflow: hidden;
+    position: relative;
+    z-index: 1;
+    margin-top: 0 ;
+  }
+  body {
+    background: #000000;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 1) 0%, rgba(0, 100, 121, 1) 14%, rgba(0, 212, 255, 1) 20%, rgba(255, 255, 255, 1) 56%);
+  }
+  html, body {
+    width: 100%;
+    height: 100%;
+  }
+
+.main-header {
+  position: sticky;
+  top: 0;
+  background: rgba(0, 0, 0, 0.1);
+  z-index: 100;
+  box-shadow: none;
+  border-bottom: none;
+  overflow: hidden; 
+}
+
+.main-header::before {
+  content: "";
+  position: absolute;
+  top: -5px; 
+  left: 0;
+  right: 0;
+  height: calc(100% + 10px); 
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  mask: linear-gradient(
+      to bottom, 
+      rgba(0,0,0,1) 0%,
+      rgba(0,0,0,0.9) 30%,
+      rgba(0,0,0,0.5) 70%,
+      rgba(0,0,0,0.1) 90%,
+      rgba(0,0,0,0) 100%
+  );
+  pointer-events: none;
+}
+}
+
+
