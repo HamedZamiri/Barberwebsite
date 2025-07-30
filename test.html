@@ -1,417 +1,591 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fa">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./CSS/test.css">
-    <!-- <link rel="stylesheet" href="./CSS/style.css"> -->
     <title>Document</title>
 </head>
 <body>
   <header class="main-header">
     <div class="sabbtnobat">
-      <span class="back-button" onclick="window.location.href='manager.html'">
+      <span class="back-button" id="back-button">
         <img src="./icons/left.png" alt="برگشت">
       </span>      
       <h5 class="header-title">ثبت نوبت</h5>
     </div>
   </header>
   
-
-        <div class="form-wrapper">
-          <form class="appointment-form">
-            
-            <!-- نام و شماره + مخاطب -->
-            <div class="row row-contact">
-              <div class="fields">
-                <div class="floating-group">
-                  <input type="text" id="customer-name" placeholder=" " required />
-                  <label for="customer-name">نام مشتری</label>
-                </div>
-                <div class="floating-group">
-                  <input type="tel" id="customer-phone" placeholder=" " required />
-                  <label for="customer-phone">شماره مشتری</label>
-                </div>
-                <div class="bottom-line"></div>
-              </div>
-              <div class="contact-pick" onclick="pickContact()">
-                <div class="contact-icon">
-                  <img src="./icons/phone-book.png" alt="انتخاب مخاطب" />
-                  <p>انتخاب از مخاطبین</p>
-                </div>
-              </div>
-            </div>
-          
-            
+  <div class="form-wrapper">
+    <form class="appointment-form">
       
-            <!-- تاریخ و ساعت -->
-            <div class="row two-cols">
-              <input type="time" placeholder="00:00" />
-              <input type="date" placeholder="تاریخ" />
-            </div>
+      <!-- نام و شماره + مخاطب -->
+      <div class="row row-contact">
+        <div class="fields">
+          <div class="floating-group">
+            <input type="text" id="customer-name" placeholder=" " required />
+            <label for="customer-name">نام مشتری</label>
+          </div>
+          <div class="floating-group">
+            <input type="tel" id="customer-phone" placeholder=" " required />
+            <label for="customer-phone">شماره مشتری</label>
+          </div>
+          <div class="bottom-line"></div>
+        </div>
+        <div class="contact-pick" onclick="pickContact()">
+          <div class="contact-icon">
+            <img src="./icons/phone-book.png" alt="انتخاب مخاطب" />
+            <p>انتخاب از مخاطبین</p>
+          </div>
+        </div>
+      </div>
+    
+      <!-- تاریخ و ساعت -->
+      <div class="row two-cols">
+        <input type="time" placeholder="00:00" />
+        <input type="date" placeholder="تاریخ" />
+      </div>
+  
+      <!-- دکمه نمایش باکس خدمات -->
+      <div class="row">
+        <div id="selected-services" class="selected-services" style="display: none;">
+          <span class="section-title">خدمات</span>
+          <div id="service-tags"></div>
+        </div>
+        <button type="button" id="open-service-box" class="service-button">خدمات +</button>
+      </div>
+
+      <div id="overlay" class="overlay"></div>
+
+      <!-- باکس خدمات -->
+      <div id="service-box" class="service-box">
+        <div class="drag-bar"></div>
+        <div class="service-header">
+          <div class="tab" id="add-service-btn">افزودن <span>＋</span></div>
+          <div class="tab">ویرایش <span>✎</span></div>
+        </div>
+        <div id="service-items-container">
+          <p id="empty-message">هنوز خدماتی تعریف نکرده‌اید.</p>
+        </div>
+        <div id="service-actions" class="service-actions" style="display: none;">
+          <button class="btn confirm" id="confirm-btn">تأیید</button>
+          <button class="btn cancel" id="cancel-btn">بستن</button>
+          <button class="btn back" id="back-btn" style="display: none;">برگشت</button>
+        </div>
+      </div>
+
+      <!-- مودال افزودن خدمات -->
+      <div id="add-service-modal" class="modal">
+        <div class="modal-content">
+          <p class="modal-title">نام خدمات را وارد نمایید</p>
+          <div class="floating-group">
+            <input type="text" id="new-service-input" placeholder=" " required />
+            <label for="new-service-input">نام خدمات</label>
+          </div>
+          <div class="modal-actions">
+            <button id="modal-confirm-btn" class="btn confirm">تأیید</button>
+            <button id="modal-cancel-btn" class="btn cancel">بازگشت</button>
+          </div>
+        </div>
+      </div>
       
-<!-- دکمه نمایش باکس خدمات -->
-<div class="row">
-  <div id="selected-services" class="selected-services" style="display: none;">
-    <span class="section-title">خدمات</span>
-    <div id="service-tags"></div>
-  </div>
-  <button type="button" id="open-service-box" class="service-button">خدمات +</button>
-</div>
-
-
-<div id="overlay" class="overlay"></div>
-
-<!-- باکس خدمات -->
-<div id="service-box" class="service-box">
-  <div class="drag-bar"></div>
-  <div class="service-header">
-    <div class="tab" id="add-service-btn">افزودن <span>＋</span></div>
-    <div class="tab">ویرایش <span>✎</span></div>
-  </div>
-<!-- آیتم‌های خدمات مستقیماً اینجا میان -->
-<div id="service-items-container">
-  <p id="empty-message">هنوز خدماتی تعریف نکرده‌اید.</p>
-</div>
-  <!-- ✅ دکمه‌ها -->
-  <div id="service-actions" class="service-actions" style="display: none;">
-    <button class="btn confirm" onclick="updateSelectedServices(); closeServiceBox()">تأیید</button>
-    <button class="btn cancel" onclick="closeServiceBox()">بستن</button>
-    <!-- <button class="btn cancel" onclick="closeServiceBox()">بستن</button> -->
-    <button class="btn back" onclick="exitEditMode()" style="display: none;">برگشت</button>
-  </div>
-
-</div>
-
-<!-- مودال افزودن خدمات -->
-<div id="add-service-modal" class="modal">
-  <div class="modal-content">
-    <p class="modal-title">نام خدمات را وارد نمایید</p>
-    <div class="floating-group">
-      <input type="text" id="new-service-input" placeholder=" " required />
-      <label for="new-service-input">نام خدمات</label>
-    </div>
-    <div class="modal-actions">
-      <button onclick="confirmAddService()" class="btn confirm">تأیید</button>
-      <button onclick="closeModal()" class="btn cancel">بازگشت</button>
-    </div>
-  </div>
-</div>
- 
-
+      <!-- توضیحات -->
+      <div class="row">
+        <div class="floating-group">
+          <input type="text" id="notes" placeholder=" " />
+          <label for="notes">توضیحات</label>
+        </div>
+      </div>
+    
+      <!-- سوییچ‌ها -->
+      <div class="row switches">
+        <label><span>پیامک رزرو</span><input type="checkbox" /></label>
+        <label><span>ارسال لینک بیعانه</span><input type="checkbox" /></label>
+      </div>
       
-            <!-- توضیحات -->
-            <div class="row">
-              <div class="floating-group">
-                <input type="text" id="notes" placeholder=" " />
-                <label for="notes">توضیحات</label>
-              </div>
-            </div>
+      <button type="submit" class="done">ثبت</button>
+
+    </form>
+  </div> 
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      // متغیرهای اصلی
+      const serviceBox = document.getElementById("service-box");
+      const openServiceBtn = document.getElementById("open-service-box");
+      const overlay = document.getElementById("overlay");
+      const addServiceTab = document.getElementById("add-service-btn");
+      const editServiceTab = document.querySelector('.tab:nth-child(2)');
+      const serviceItemsContainer = document.getElementById("service-items-container");
+      const emptyMessage = document.getElementById("empty-message");
+      const addServiceModal = document.getElementById("add-service-modal");
+      const newServiceInput = document.getElementById("new-service-input");
+      const serviceActions = document.getElementById("service-actions");
       
-            <!-- سوییچ‌ها -->
-            <div class="row switches">
-              <label><span>پیامک رزرو</span><input type="checkbox" /></label>
-              <label><span>ارسال لینک بیعانه</span><input type="checkbox" /></label>
-            </div>
-            
-            <button type="submit" class="done">ثبت</button>
+      let isEditMode = false;
+      let currentEditingItem = null;
+      let selectedServices = new Set();
+      let isUpdatingCheckbox = false; // فلگ برای جلوگیری از change event
 
-          </form>
-        </div> 
-        
-
-        <script>
-document.addEventListener("DOMContentLoaded", function() {
-  const serviceBox = document.getElementById("service-box");
-  const openServiceBtn = document.getElementById("open-service-box");
-  const overlay = document.getElementById("overlay");
-  const addServiceTab = document.getElementById("add-service-btn");
-  const editServiceTab = document.querySelector('.tab:nth-child(2)');
-  const serviceItemsContainer = document.getElementById("service-items-container");
-  const emptyMessage = document.getElementById("empty-message");
-  const addServiceModal = document.getElementById("add-service-modal");
-  const newServiceInput = document.getElementById("new-service-input");
-  const serviceActions = document.getElementById("service-actions");
-  const confirmServicesBtn = serviceActions.querySelector(".confirm");
-  const cancelServicesBtn = serviceActions.querySelector(".cancel");
-  const backServicesBtn = serviceActions.querySelector(".back");
-
-  let isEditMode = false;
-  let currentEditingItem = null;
-
-  // نگهداری خدمات انتخاب شده
-  let selectedServices = new Set();
-
-  // باز کردن مودال افزودن خدمت
-  addServiceTab.addEventListener("click", () => {
-    currentEditingItem = null;
-    newServiceInput.value = "";
-    addServiceModal.style.display = "flex";
-    newServiceInput.focus();
-  });
-
-  // ویرایش حالت ویرایش خدمات
-  editServiceTab.addEventListener("click", toggleEditMode);
-
-  function toggleEditMode() {
-    isEditMode = !isEditMode;
-    if (isEditMode) {
-      enterEditMode();
-    } else {
-      exitEditMode();
-    }
-  }
-
-  function enterEditMode() {
-    serviceItemsContainer.classList.add("edit-mode");
-    editServiceTab.style.backgroundColor = "#ccc";
-    cancelServicesBtn.style.display = "none";
-    backServicesBtn.style.display = "inline-block";
-    // اضافه کردن آیکون‌های ویرایش و حذف به آیتم‌ها
-    document.querySelectorAll(".service-item:not(.has-actions)").forEach(item => {
-      addActionIcons(item);
-      item.classList.add("has-actions");
-    });
-  }
-
-  function exitEditMode() {
-    isEditMode = false;
-    currentEditingItem = null;
-    serviceItemsContainer.classList.remove("edit-mode");
-    editServiceTab.style.backgroundColor = "";
-    cancelServicesBtn.style.display = "inline-block";
-    backServicesBtn.style.display = "none";
-    document.querySelectorAll(".action-icons").forEach(icon => icon.remove());
-    document.querySelectorAll(".service-item").forEach(item => item.classList.remove("has-actions"));
-  }
-
-  function addActionIcons(item) {
-    const iconsContainer = document.createElement("div");
-    iconsContainer.className = "action-icons";
-
-    const editIcon = document.createElement("span");
-    editIcon.className = "edit-icon";
-    editIcon.innerHTML = "✎";
-    editIcon.addEventListener("click", e => {
-      e.stopPropagation();
-      editService(item);
-    });
-
-    const deleteIcon = document.createElement("span");
-    deleteIcon.className = "delete-icon";
-    deleteIcon.innerHTML = "×";
-    deleteIcon.addEventListener("click", e => {
-      e.stopPropagation();
-      deleteService(item);
-    });
-
-    iconsContainer.appendChild(editIcon);
-    iconsContainer.appendChild(deleteIcon);
-    item.appendChild(iconsContainer);
-  }
-
-  function editService(item) {
-    currentEditingItem = item;
-    newServiceInput.value = item.querySelector(".service-name").textContent;
-    addServiceModal.style.display = "flex";
-    newServiceInput.focus();
-  }
-
-  function deleteService(item) {
-    if (confirm("آیا از حذف این خدمت اطمینان دارید؟")) {
-      const serviceName = item.querySelector(".service-name").textContent;
-      removeServiceTag(serviceName);
-      selectedServices.delete(serviceName);
-      item.remove();
-
-      if (serviceItemsContainer.querySelectorAll(".service-item").length === 0) {
-        emptyMessage.style.display = "block";
-        if (isEditMode) toggleEditMode();
-      }
-      updateSelectedServicesUI();
-    }
-  }
-
-  // افزودن خدمت جدید به لیست
-  function addNewService(name) {
-    emptyMessage.style.display = "none";
-
-    const item = document.createElement("label");
-    item.className = "service-item";
-    item.innerHTML = `
-      <input type="checkbox" class="service-checkbox" />
-      <span class="custom-checkbox"></span>
-      <span class="service-name">${name}</span>
-    `;
-
-    // کلیک روی آیتم برای انتخاب/لغو انتخاب (اگر در حالت ویرایش نیستیم)
-    item.addEventListener("click", e => {
-      if (!e.target.closest(".action-icons") && !isEditMode) {
-        toggleServiceSelection(item);
-      }
-    });
-
-    // کلیک روی خود چک‌باکس باید حالت checked را تغییر دهد و کلاس بصری اضافه/حذف شود
-    const checkbox = item.querySelector(".service-checkbox");
-    const visual = item.querySelector(".custom-checkbox");
-    checkbox.addEventListener("change", () => {
-      if (checkbox.checked) {
-        visual.classList.add("checked");
-        selectedServices.add(name);
-      } else {
-        visual.classList.remove("checked");
-        selectedServices.delete(name);
-      }
-      updateSelectedServicesUI();
-    });
-
-    serviceItemsContainer.appendChild(item);
-
-    if (isEditMode) {
-      addActionIcons(item);
-      item.classList.add("has-actions");
-    }
-  }
-
-  // انتخاب یا لغو انتخاب یک خدمت (با کلیک روی کل آیتم)
-  function toggleServiceSelection(item) {
-    const checkbox = item.querySelector(".service-checkbox");
-    checkbox.checked = !checkbox.checked;
-
-    const visual = item.querySelector(".custom-checkbox");
-    if (checkbox.checked) {
-      visual.classList.add("checked");
-      const name = item.querySelector(".service-name").textContent;
-      selectedServices.add(name);
-    } else {
-      visual.classList.remove("checked");
-      const name = item.querySelector(".service-name").textContent;
-      selectedServices.delete(name);
-    }
-    updateSelectedServicesUI();
-  }
-
-  // به‌روزرسانی نمایش خدمات انتخاب‌شده (تگ‌ها)
-  function updateSelectedServicesUI() {
-    const container = document.getElementById("service-tags");
-    const selectedBox = document.getElementById("selected-services");
-    container.innerHTML = "";
-
-    if (selectedServices.size === 0) {
-      selectedBox.style.display = "none";
-      return;
-    }
-
-    selectedServices.forEach(name => {
-      const tag = document.createElement("div");
-      tag.className = "service-tag";
-      tag.innerHTML = `
-        <span>${name}</span>
-        <span class="remove-tag" style="cursor:pointer;">×</span>
-      `;
-      // حذف تگ هنگام کلیک روی ضربدر
-      tag.querySelector(".remove-tag").addEventListener("click", () => {
-        removeServiceTag(name);
+      // ========== توابع اصلی ==========
+      
+      // باز کردن باکس خدمات
+      openServiceBtn.addEventListener("click", () => {
+        serviceBox.classList.add("active");
+        overlay.classList.add("active");
+        serviceActions.style.display = "flex";
+        syncCheckboxes();
       });
 
-      container.appendChild(tag);
-    });
+      // بستن باکس خدمات
+      function closeServiceBox() {
+        serviceBox.classList.remove("active");
+        overlay.classList.remove("active");
+        if (isEditMode) {
+          exitEditMode();
+        }
+      }
 
-    selectedBox.style.display = "flex";
-  }
+      // همگام‌سازی چک‌باکس‌ها
+      function syncCheckboxes() {
+        isUpdatingCheckbox = true;
+        document.querySelectorAll(".service-item").forEach(item => {
+          const name = item.querySelector(".service-name").textContent;
+          const checkbox = item.querySelector(".service-checkbox");
+          const visual = item.querySelector(".custom-checkbox");
+          
+          checkbox.checked = selectedServices.has(name);
+          visual.classList.toggle("checked", selectedServices.has(name));
+        });
+        isUpdatingCheckbox = false;
+      }
 
-  // حذف تگ خدمات انتخاب‌شده و برداشتن تیک چک‌باکس مربوطه
-  function removeServiceTag(serviceName) {
-    selectedServices.delete(serviceName);
+      // به‌روزرسانی UI تگ‌ها
+      function updateTagsUI() {
+        const container = document.getElementById("service-tags");
+        const selectedBox = document.getElementById("selected-services");
+        
+        // خالی کردن کانتینر
+        container.innerHTML = "";
+        
+        // اگر هیچ سرویسی انتخاب نشده
+        if (selectedServices.size === 0) {
+          selectedBox.style.display = "none";
+          return;
+        }
+        
+        // ایجاد تگ‌ها
+        selectedServices.forEach(name => {
+          const tag = document.createElement("div");
+          tag.className = "service-tag";
+          tag.innerHTML = `
+            <span>${name}</span>
+            <span class="remove-tag">×</span>
+          `;
+          
+          tag.querySelector(".remove-tag").addEventListener("click", () => {
+            removeServiceTag(name);
+          });
+          
+          container.appendChild(tag);
+        });
+        
+        selectedBox.style.display = "flex";
+      }
 
-    document.querySelectorAll(".service-item").forEach(item => {
-      if (item.querySelector(".service-name").textContent === serviceName) {
+      // حذف تگ سرویس
+      function removeServiceTag(serviceName) {
+        selectedServices.delete(serviceName);
+        
+        // به‌روزرسانی چک‌باکس‌ها
+        isUpdatingCheckbox = true;
+        document.querySelectorAll(".service-item").forEach(item => {
+          if (item.querySelector(".service-name").textContent === serviceName) {
+            const checkbox = item.querySelector(".service-checkbox");
+            const visual = item.querySelector(".custom-checkbox");
+            checkbox.checked = false;
+            visual.classList.remove("checked");
+          }
+        });
+        isUpdatingCheckbox = false;
+        
+        updateTagsUI();
+        updateEmptyState();
+      }
+
+      // به‌روزرسانی وضعیت خالی
+      function updateEmptyState() {
+        const serviceItems = serviceItemsContainer.querySelectorAll(".service-item");
+        const hasItems = serviceItems.length > 0;
+        
+        emptyMessage.style.display = hasItems ? "none" : "block";
+        
+        if (!hasItems && isEditMode) {
+          exitEditMode();
+        }
+      }
+
+      // افزودن سرویس جدید
+      function addNewService(name) {
+        // بررسی تکراری بودن
+        const existingService = Array.from(serviceItemsContainer.querySelectorAll(".service-name"))
+          .some(el => el.textContent === name);
+        
+        if (existingService) {
+          alert("این خدمت قبلاً اضافه شده است");
+          return;
+        }
+        
+        emptyMessage.style.display = "none";
+        
+        const item = document.createElement("label");
+        item.className = "service-item";
+        item.innerHTML = `
+          <input type="checkbox" class="service-checkbox" />
+          <span class="custom-checkbox"></span>
+          <span class="service-name">${name}</span>
+        `;
+        
+        // رویداد کلیک
+        item.addEventListener("click", e => {
+          if (!e.target.closest(".action-icons") && !isEditMode) {
+            toggleServiceSelection(item);
+          }
+        });
+        
+        // رویداد تغییر چک‌باکس
         const checkbox = item.querySelector(".service-checkbox");
         const visual = item.querySelector(".custom-checkbox");
-        checkbox.checked = false;
-        visual.classList.remove("checked");
-      }
-    });
-    updateSelectedServicesUI();
-  }
-
-  // بسته شدن مودال افزودن خدمت
-  window.closeModal = function() {
-    addServiceModal.style.display = "none";
-    currentEditingItem = null;
-  };
-
-  // بسته شدن باکس خدمات
-  window.closeServiceBox = function() {
-    serviceBox.classList.remove("active");
-    overlay.classList.remove("active");
-    if (isEditMode) exitEditMode();
-  };
-
-  // باز کردن باکس خدمات
-  openServiceBtn.addEventListener("click", () => {
-    serviceBox.classList.add("active");
-    overlay.classList.add("active");
-    serviceActions.style.display = "flex";
-
-    // هنگام باز شدن، چک‌باکس‌ها را با خدمات انتخاب شده همگام کن
-    document.querySelectorAll(".service-item").forEach(item => {
-      const name = item.querySelector(".service-name").textContent;
-      const checkbox = item.querySelector(".service-checkbox");
-      const visual = item.querySelector(".custom-checkbox");
-
-      if (selectedServices.has(name)) {
-        checkbox.checked = true;
-        visual.classList.add("checked");
-      } else {
-        checkbox.checked = false;
-        visual.classList.remove("checked");
-      }
-    });
-  });
-
-  // کلیک روی پس‌زمینه برای بستن باکس
-  overlay.addEventListener("click", closeServiceBox);
-
-  // مدیریت دکمه برگشت در حالت ویرایش
-  backServicesBtn.addEventListener("click", e => {
-    e.preventDefault();
-    e.stopPropagation();
-    exitEditMode();
-  });
-
-  // تأیید افزودن یا ویرایش خدمت
-  window.confirmAddService = function() {
-    const name = newServiceInput.value.trim();
-    if (!name) {
-      newServiceInput.focus();
-      return;
-    }
-
-    if (currentEditingItem) {
-      // ویرایش خدمت موجود
-      const oldName = currentEditingItem.querySelector(".service-name").textContent;
-      currentEditingItem.querySelector(".service-name").textContent = name;
-      if (selectedServices.has(oldName)) {
-        selectedServices.delete(oldName);
-        selectedServices.add(name);
-      }
-      updateSelectedServicesUI();
-    } else {
-      // افزودن خدمت جدید
-      addNewService(name);
-      updateSelectedServicesUI();
-    }
-
-    closeModal();
-    serviceActions.style.display = "flex";
-    currentEditingItem = null;
-  };
-
-});
-          </script>
-          
         
+        checkbox.addEventListener("change", () => {
+          if (isUpdatingCheckbox) return; // جلوگیری از اجرا در حین به‌روزرسانی برنامه‌ای
+          
+          const serviceName = item.querySelector(".service-name").textContent;
+          
+          if (checkbox.checked) {
+            visual.classList.add("checked");
+            selectedServices.add(serviceName);
+          } else {
+            visual.classList.remove("checked");
+            selectedServices.delete(serviceName);
+          }
+          
+          updateTagsUI();
+        });
+        
+        serviceItemsContainer.appendChild(item);
+        
+        if (isEditMode) {
+          addActionIcons(item);
+          item.classList.add("has-actions");
+        }
+      }
+
+      // تغییر انتخاب سرویس
+      function toggleServiceSelection(item) {
+        const checkbox = item.querySelector(".service-checkbox");
+        const visual = item.querySelector(".custom-checkbox");
+        const serviceName = item.querySelector(".service-name").textContent;
+        
+        checkbox.checked = !checkbox.checked;
+        
+        if (checkbox.checked) {
+          visual.classList.add("checked");
+          selectedServices.add(serviceName);
+        } else {
+          visual.classList.remove("checked");
+          selectedServices.delete(serviceName);
+        }
+        
+        updateTagsUI();
+      }
+
+      // حذف سرویس
+      function deleteService(item) {
+        if (!confirm("آیا از حذف این خدمت اطمینان دارید؟")) return;
+        
+        const serviceName = item.querySelector(".service-name").textContent;
+        
+        // حذف از selectedServices
+        selectedServices.delete(serviceName);
+        
+        // حذف از DOM
+        item.remove();
+        
+        // به‌روزرسانی UI
+        updateTagsUI();
+        updateEmptyState();
+      }
+
+      // ========== توابع ویرایش ==========
+      
+      editServiceTab.addEventListener("click", toggleEditMode);
+      
+      function toggleEditMode() {
+        isEditMode = !isEditMode;
+        if (isEditMode) {
+          enterEditMode();
+        } else {
+          exitEditMode();
+        }
+      }
+      
+      function enterEditMode() {
+        serviceItemsContainer.classList.add("edit-mode");
+        editServiceTab.style.backgroundColor = "#ccc";
+        document.querySelector(".service-actions .cancel").style.display = "none";
+        document.querySelector(".service-actions .back").style.display = "inline-block";
+        
+        document.querySelectorAll(".service-item:not(.has-actions)").forEach(item => {
+          addActionIcons(item);
+          item.classList.add("has-actions");
+        });
+      }
+      
+      function exitEditMode() {
+        isEditMode = false;
+        currentEditingItem = null;
+        serviceItemsContainer.classList.remove("edit-mode");
+        editServiceTab.style.backgroundColor = "";
+        document.querySelector(".service-actions .cancel").style.display = "inline-block";
+        document.querySelector(".service-actions .back").style.display = "none";
+        
+        document.querySelectorAll(".action-icons").forEach(icon => icon.remove());
+        document.querySelectorAll(".service-item").forEach(item => item.classList.remove("has-actions"));
+        
+        // همگام‌سازی چک‌باکس‌ها بدون فراخوانی change event
+        isUpdatingCheckbox = true;
+        document.querySelectorAll(".service-item").forEach(item => {
+          const name = item.querySelector(".service-name").textContent;
+          const checkbox = item.querySelector(".service-checkbox");
+          const visual = item.querySelector(".custom-checkbox");
+          
+          checkbox.checked = selectedServices.has(name);
+          visual.classList.toggle("checked", selectedServices.has(name));
+        });
+        isUpdatingCheckbox = false;
+      }
+      
+      function addActionIcons(item) {
+        const iconsContainer = document.createElement("div");
+        iconsContainer.className = "action-icons";
+        
+        const editIcon = document.createElement("span");
+        editIcon.className = "edit-icon";
+        editIcon.innerHTML = "✎";
+        editIcon.addEventListener("click", e => {
+          e.stopPropagation();
+          editService(item);
+        });
+        
+        const deleteIcon = document.createElement("span");
+        deleteIcon.className = "delete-icon";
+        deleteIcon.innerHTML = "×";
+        deleteIcon.addEventListener("click", e => {
+          e.stopPropagation();
+          deleteService(item);
+        });
+        
+        iconsContainer.appendChild(editIcon);
+        iconsContainer.appendChild(deleteIcon);
+        item.appendChild(iconsContainer);
+      }
+      
+      function editService(item) {
+        currentEditingItem = item;
+        newServiceInput.value = item.querySelector(".service-name").textContent;
+        addServiceModal.style.display = "flex";
+        newServiceInput.focus();
+      }
+
+      // ========== توابع مودال ==========
+      
+      addServiceTab.addEventListener("click", () => {
+        currentEditingItem = null;
+        newServiceInput.value = "";
+        addServiceModal.style.display = "flex";
+        newServiceInput.focus();
+      });
+      
+      function closeModal() {
+        addServiceModal.style.display = "none";
+        currentEditingItem = null;
+      }
+      
+      function confirmAddService() {
+        const name = newServiceInput.value.trim();
+        if (!name) {
+          alert("لطفاً نام خدمت را وارد کنید");
+          newServiceInput.focus();
+          return;
+        }
+        
+        if (currentEditingItem) {
+          const oldName = currentEditingItem.querySelector(".service-name").textContent;
+          currentEditingItem.querySelector(".service-name").textContent = name;
+          
+          // به‌روزرسانی selectedServices
+          if (selectedServices.has(oldName)) {
+            selectedServices.delete(oldName);
+            selectedServices.add(name);
+          }
+          
+          updateTagsUI();
+        } else {
+          addNewService(name);
+        }
+        
+        closeModal();
+      }
+
+      // ========== توابع عمومی ==========
+      
+      overlay.addEventListener("click", () => {
+        closeServiceBox();
+      });
+      
+             // ========== رویدادهای دکمه‌ها ==========
+       
+       // دکمه‌های باکس خدمات
+       document.getElementById("confirm-btn").addEventListener("click", () => {
+         closeServiceBox();
+       });
+       
+       document.getElementById("cancel-btn").addEventListener("click", () => {
+         closeServiceBox();
+       });
+       
+       document.getElementById("back-btn").addEventListener("click", () => {
+         exitEditMode();
+       });
+       
+       // دکمه‌های مودال
+       document.getElementById("modal-confirm-btn").addEventListener("click", () => {
+         confirmAddService();
+       });
+       
+       document.getElementById("modal-cancel-btn").addEventListener("click", () => {
+         closeModal();
+       });
+       
+       // توابع عمومی برای HTML
+       window.closeModal = closeModal;
+       window.closeServiceBox = closeServiceBox;
+       window.exitEditMode = exitEditMode;
+       window.updateSelectedServices = closeServiceBox;
+       window.confirmAddService = confirmAddService;
+
+      // ========== توابع مخاطبین ==========
+      const contactModal = document.getElementById("contact-pick-modal");
+      const contactsContainer = document.getElementById("contacts-container");
+      const contactPickBtn = document.querySelector(".contact-pick");
+      const customerNameInput = document.getElementById("customer-name");
+      const customerPhoneInput = document.getElementById("customer-phone");
+      
+      window.pickContact = async function() {
+        const isMobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+        
+        if (!isMobile) {
+          alert("این قابلیت فقط در موبایل قابل استفاده است. لطفاً در گوشی خود امتحان کنید.");
+          return;
+        }
+        
+        try {
+          if (!('contacts' in navigator && 'ContactsManager' in window)) {
+            throw new Error("مرورگر شما از قابلیت دسترسی به مخاطبین پشتیبانی نمی‌کند");
+          }
+          
+          const permissions = await navigator.permissions.query({name: 'contacts'});
+          if (permissions.state !== 'granted') {
+            const permissionResult = await navigator.permissions.request({name: 'contacts'});
+            if (permissionResult.state !== 'granted') {
+              throw new Error("دسترسی به مخاطبین رد شد");
+            }
+          }
+          
+          contactModal.style.display = "block";
+          contactsContainer.innerHTML = "<p>در حال بارگذاری مخاطبین...</p>";
+          
+          const props = ['name', 'tel'];
+          const opts = {multiple: true};
+          const contacts = await navigator.contacts.select(props, opts);
+          
+          if (contacts && contacts.length > 0) {
+            renderContacts(contacts);
+          } else {
+            contactsContainer.innerHTML = "<p>مخاطبی یافت نشد</p>";
+          }
+        } catch (error) {
+          console.error("خطا در دریافت مخاطبین:", error);
+          
+          if (error.message.includes("پشتیبانی نمی‌کند")) {
+            contactsContainer.innerHTML = `
+              <p>این قابلیت در مرورگر شما پشتیبانی نمی‌شود</p>
+              <p>لطفاً از مرورگرهای جدید مانند Chrome یا Edge استفاده کنید</p>
+            `;
+            contactModal.style.display = "block";
+          } else {
+            alert("خطا در دریافت مخاطبین: " + error.message);
+          }
+        }
+      };
+      
+      function renderContacts(contacts) {
+        contactsContainer.innerHTML = "";
+        contacts.forEach(contact => {
+          const contactDiv = document.createElement("div");
+          contactDiv.className = "contact-item";
+          
+          let phone = "";
+          if (contact.tel && contact.tel.length > 0) {
+            phone = contact.tel[0];
+          }
+          
+          contactDiv.innerHTML = `
+            <strong>${contact.name ? contact.name[0] : 'بدون نام'}</strong>
+            <div>${phone || 'بدون شماره'}</div>
+          `;
+          
+          contactDiv.addEventListener("click", () => {
+            selectContact(
+              contact.name ? contact.name[0] : 'بدون نام',
+              phone
+            );
+          });
+          
+          contactsContainer.appendChild(contactDiv);
+        });
+      }
+      
+      function selectContact(name, phone) {
+        customerNameInput.value = name;
+        customerPhoneInput.value = phone;
+        closeContactModal();
+      }
+      
+      window.closeContactModal = function() {
+        contactModal.style.display = "none";
+      };
+      
+      contactPickBtn.addEventListener("click", pickContact);
+      
+      // دکمه برگشت
+      document.getElementById("back-button").addEventListener("click", () => {
+        window.location.href = 'manager.html';
+      });
+      
+      // تابع دیباگ
+      window.debugServices = function() {
+        console.log("=== دیباگ خدمات ===");
+        console.log("selectedServices:", Array.from(selectedServices));
+        console.log("تعداد آیتم‌ها:", serviceItemsContainer.querySelectorAll(".service-item").length);
+        console.log("تعداد تگ‌ها:", document.getElementById("service-tags").children.length);
+        console.log("نمایش باکس:", document.getElementById("selected-services").style.display);
+        console.log("isEditMode:", isEditMode);
+        console.log("==================");
+      };
+    });
+  </script>
 
 </body>
 </html>
